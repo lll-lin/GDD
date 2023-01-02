@@ -55,7 +55,7 @@ def frameEmbeding(activityList, frameActivityList):
     featureList = []
     for activity in activityList:
         if activity in frameActivityList:
-            index = frameActivityList.index(activity)
+            index = activityList.index(activity)
             nodeFeature = [0] * (len(activityList))
             nodeFeature[index] = 1
             featureList.append(nodeFeature)
@@ -80,6 +80,7 @@ def edgeEmbeding(activityList, graph):
 def Embedding(frameLen,stepLen,fileName):
     logList = Parse.Parse(fileName)
     activityList = countActivity(logList)
+    activityList.sort()
     startIndex = 0
     splitPoint = startIndex + frameLen
     endIndex = splitPoint + frameLen
@@ -101,7 +102,7 @@ def Embedding(frameLen,stepLen,fileName):
         secondActivityList = countActivity(secondFrame)
         firstFrameEmbeding = frameEmbeding(activityList, firstActivityList)
         secondFrameEmbeding = frameEmbeding(activityList, secondActivityList)
-        train_x = (firstGrah, secondGrah, firstFrameEmbeding, secondFrameEmbeding)
+        # train_x = (firstGrah, secondGrah, firstFrameEmbeding, secondFrameEmbeding)
         train_y = 0
         trainSet["firstGrah"].append(firstGrah)
         trainSet["secondGrah"].append(secondGrah)
